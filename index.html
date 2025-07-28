@@ -24,9 +24,9 @@
   <header>
     <h1>GA4 Demo Page</h1>
     <nav>
-      <a href="#home" onclick="gtag('event', 'nav_click', { page_section: 'home' });">Home</a>
-      <a href="#about" onclick="gtag('event', 'nav_click', { page_section: 'about' });">About</a>
-      <a href="#contact" onclick="gtag('event', 'nav_click', { page_section: 'contact' });">Contact</a>
+      <a href="#home" id="home_menu">Home</a>
+      <a href="#about" id="about_menu">About</a>
+      <a href="#contact" id="contact_menu">Contact</a>
     </nav>
   </header>
 
@@ -34,7 +34,7 @@
     <section id="home">
       <h2>Welcome</h2>
       <p>This page is used to demo GA4 pageviews and events.</p>
-      <button onclick="gtag('event', 'cta_click', { label: 'Get Started Button' });">
+      <button id="get_started_button">
         Get Started
       </button>
     </section>
