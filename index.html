@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-M4347Q2F');</script>
+  <!-- End Google Tag Manager -->
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GA4 Demo Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M4347Q2F" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+  <header>
+    <h1>GA4 Demo Page</h1>
+    <nav>
+      <a href="#home" onclick="gtag('event', 'nav_click', { page_section: 'home' });">Home</a>
+      <a href="#about" onclick="gtag('event', 'nav_click', { page_section: 'about' });">About</a>
+      <a href="#contact" onclick="gtag('event', 'nav_click', { page_section: 'contact' });">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home">
+      <h2>Welcome</h2>
+      <p>This page is used to demo GA4 pageviews and events.</p>
+      <button onclick="gtag('event', 'cta_click', { label: 'Get Started Button' });">
+        Get Started
+      </button>
+    </section>
+
+    <section id="search">
+      <h2>Search the Site</h2>
+      <form onsubmit="handleSearch(event)">
+        <input type="text" id="searchQuery" placeholder="Search..." required />
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <section id="video">
+      <h2>Watch This</h2>
+      <div class="video-wrapper">
+        <iframe id="ytplayer" type="text/html"
+          width="560" height="315"
+          src="https://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1"
+          frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About This Demo</h2>
+      <p>We're tracking clicks, page views, form submissions, searches, and video plays.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form onsubmit="handleFormSubmit(event)">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 GA4 Demo</p>
+  </footer>
+
+  <!-- Custom JS -->
+  <script>
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      gtag('event', 'form_submit', {
+        form_id: 'contact_form'
+      });
+      alert("Form submitted! (Simulated)");
+    }
+
+    function handleSearch(event) {
+      event.preventDefault();
+      const query = document.getElementById('searchQuery').value;
+      gtag('event', 'search', {
+        search_term: query
+      });
+      alert(`Search term submitted: ${query}`);
+    }
+
+    // YouTube API setup
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('ytplayer', {
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.PLAYING) {
+        gtag('event', 'video_play', {
+          video_title: 'YouTube API Demo Video'
+        });
+      }
+    }
+
+    // Load the YouTube Iframe API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+  </script>
+</body>
+</html>
